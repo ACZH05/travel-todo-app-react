@@ -1,11 +1,40 @@
 import { Button, Container } from "react-bootstrap";
 import ShowChecklist from "../components/ShowChecklist";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../Contexts/AuthContext";
+import { UsersContext } from "../Contexts/usersContext";
 
 export default function Checklist() {
-    const [isDelete, setIsDelete] = useState("")
     const token = useContext(AuthContext).token
+    const {users, setUsers} = useContext(UsersContext)
+
+    const handleHomeCheck = (e) => {
+        const updatedUsers = [...users]
+      
+        const filterUser = updatedUsers.find((user) => user.username === token)
+        if (filterUser) {
+          const filterItem = filterUser.checklist.find((item) => item.item === e.target.value)
+          if (filterItem) {
+            filterItem.homeCheckStatus = e.target.checked
+          }
+        }
+      
+        setUsers(updatedUsers)
+    };
+
+    const handleHotelCheck = (e) => {
+        const updatedUsers = [...users]
+      
+        const filterUser = updatedUsers.find((user) => user.username === token)
+        if (filterUser) {
+          const filterItem = filterUser.checklist.find((item) => item.item === e.target.value)
+          if (filterItem) {
+            filterItem.hotelCheckStatus = e.target.checked
+          }
+        }
+      
+        setUsers(updatedUsers)
+    };
 
     return (
     <Container className="">
@@ -17,14 +46,13 @@ export default function Checklist() {
                     <th className="col-sm-7">Items</th>
                     <th className="col-sm-2">Before leaving home</th>
                     <th className="col-sm-2">Before leaving hotel</th>
-                    {isDelete && <th>Delete</th>}
                 </tr>
             </thead>
             <tbody className="text-start">
-                <ShowChecklist />
+                <ShowChecklist handleHomeCheck={handleHomeCheck} handleHotelCheck={handleHotelCheck} />
             </tbody>
         </table>
-    <Button className="position-absolute sticky-bottom end-0 m-5 px-4 py-2" onClick={() => setIsDelete(true)}><i className="bi bi-pencil-square me-2" />Edit</Button>
+    <Button className="position-absolute sticky-bottom end-0 m-5 px-4 py-2"><i className="bi bi-pencil-square me-2" />Edit</Button>
     </Container>
     )
 }
