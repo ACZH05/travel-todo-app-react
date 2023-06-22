@@ -9,12 +9,16 @@ function ShowChecklist({handleHomeCheck, handleHotelCheck, isDelete}) {
     const setUsers = useContext(UsersContext).setUsers
     const filterUsers = users.filter((user) => user.username === token)[0]
 
-    const handleClick = (e) => {
+    const handleDelete = (e) => {
         const updateUsers = [...users]
 
-        const filterUser = updateUsers.find((user) => user.username === token)
-        const filterItem = filterUser.checklist.filter((item) => item.item !== e.target.value)
-        filterUser.checklist = filterItem
+        const filterUser = updateUsers.filter((user) => user.username === token)[0]
+        if (filterUser) {
+            const filterItem = filterUser.checklist.filter((item) => item.item !== e.target.value)
+            if (filterItem) {
+                filterUser.checklist = filterItem
+            }
+        }
         setUsers(updateUsers)
     }
     
@@ -26,7 +30,7 @@ function ShowChecklist({handleHomeCheck, handleHotelCheck, isDelete}) {
                 <td className="text-center"><Form.Check type="checkbox" value={list.item} checked={list.homeCheckStatus} onChange={handleHomeCheck} /></td>
                 <td className="text-center"><Form.Check type="checkbox" value={list.item} checked={list.hotelCheckStatus} onChange={handleHotelCheck} /></td>
                 {isDelete && (
-                    <td><Button value={list.item} onClick={handleClick} variant="danger"><i className="bi bi-trash"></i></Button></td>
+                    <td><Button value={list.item} onClick={handleDelete} variant="danger"><i className="bi bi-trash"></i></Button></td>
                 )}
             </tr>
         )
