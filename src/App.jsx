@@ -9,6 +9,7 @@ import useLocalStorage from 'use-local-storage'
 import { AuthContext } from './Contexts/AuthContext'
 import RequireAuth from './components/RequireAuth'
 import SectionAuth from './components/SectionAuth'
+import { UsersContext } from './Contexts/usersContext'
 
 function Layout() {
   return (
@@ -31,19 +32,22 @@ function Layout() {
 
 export default function App() {
   const [token, setToken] = useLocalStorage("token", null)
+  const [users, setUsers] = useLocalStorage("users", [])
   return (
     <AuthContext.Provider value={{ token, setToken }}>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Layout />}>
-            <Route index element={<RequireAuth><Checklist /></RequireAuth>} />
-            <Route path='bucketlist' element={<RequireAuth><Bucketlist /></RequireAuth>} />
-            <Route path='login' element={<Login />} />
-            <Route path='register' element={<Register />} />
-            <Route path='*' element={<ErrorPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <UsersContext.Provider value={{ users, setUsers}}>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<Layout />}>
+              <Route index element={<RequireAuth><Checklist /></RequireAuth>} />
+              <Route path='bucketlist' element={<RequireAuth><Bucketlist /></RequireAuth>} />
+              <Route path='login' element={<Login />} />
+              <Route path='register' element={<Register />} />
+              <Route path='*' element={<ErrorPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </UsersContext.Provider>
     </AuthContext.Provider>
   )
 }
