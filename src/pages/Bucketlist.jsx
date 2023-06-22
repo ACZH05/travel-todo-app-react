@@ -1,10 +1,10 @@
-import { Badge, Button, Card, Container } from "react-bootstrap";
+import { Button, Card, Container } from "react-bootstrap";
 
 export default function Bucketlist() {
   return (
     <Container>
         <h1 className="my-3">Bucket list</h1>
-        <Card className="border-danger" style={{ "min-width": "20rem","max-width": "25rem"}}>
+        <Card className="border-danger" style={{ minWidth: "20rem",maxWidth: "25rem"}}>
             <Card.Body>
                 <Card.Title>Not completed task card example</Card.Title>
                 <Card.Text>Time: 10pm</Card.Text>
@@ -14,7 +14,7 @@ export default function Bucketlist() {
                 </div>
             </Card.Body>
         </Card>
-        <Card className="border-success mt-5" style={{ "min-width": "20rem","max-width": "25rem"}}>
+        <Card className="border-success mt-5" style={{ minWidth: "20rem", maxWidth: "25rem"}}>
             <Card.Body>
                 <Card.Title>Completed task card example</Card.Title>
                 <Card.Text>Time: 10pm</Card.Text>
