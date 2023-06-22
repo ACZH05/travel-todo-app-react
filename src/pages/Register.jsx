@@ -19,7 +19,7 @@ export default function Register() {
       checklist: checklist,
       bucketlist: []
     }
-    setUsers(...users, newUser)
+    setUsers([...users, newUser])
     navigate("/login")
   }
 
