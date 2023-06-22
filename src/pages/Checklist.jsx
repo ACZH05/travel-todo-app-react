@@ -1,10 +1,12 @@
-import { Button, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import ShowChecklist from "../components/ShowChecklist";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../Contexts/AuthContext";
 import { UsersContext } from "../Contexts/usersContext";
+import EditButtonChecklist from "../components/EditButtonChecklist";
 
 export default function Checklist() {
+    const [isDelete, setIsDelete] = useState(false)
     const token = useContext(AuthContext).token
     const {users, setUsers} = useContext(UsersContext)
 
@@ -46,13 +48,16 @@ export default function Checklist() {
                     <th className="col-sm-7">Items</th>
                     <th className="col-sm-2">Before leaving home</th>
                     <th className="col-sm-2">Before leaving hotel</th>
+                    {isDelete && (
+                        <th>Delete</th>
+                    )}
                 </tr>
             </thead>
             <tbody className="text-start">
-                <ShowChecklist handleHomeCheck={handleHomeCheck} handleHotelCheck={handleHotelCheck} />
+                <ShowChecklist handleHomeCheck={handleHomeCheck} handleHotelCheck={handleHotelCheck} isDelete={isDelete} />
             </tbody>
         </table>
-    <Button className="position-absolute sticky-bottom end-0 m-5 px-4 py-2"><i className="bi bi-pencil-square me-2" />Edit</Button>
+    <EditButtonChecklist isDelete={isDelete} setIsDelete={setIsDelete} />
     </Container>
     )
 }
