@@ -4,6 +4,7 @@ import Register from './pages/Register'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import Checklist from './pages/Checklist'
 import Bucketlist from './pages/Bucketlist'
+import ErrorPage from './pages/ErrorPage'
 
 function Layout() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
             <Route path='bucketlist' element={<Bucketlist />} />
             <Route path='login' element={<Login />} />
             <Route path='register' element={<Register />} />
+            <Route path='*' element={<ErrorPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
