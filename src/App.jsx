@@ -8,6 +8,7 @@ import ErrorPage from './pages/ErrorPage'
 import useLocalStorage from 'use-local-storage'
 import { AuthContext } from './Contexts/AuthContext'
 import RequireAuth from './components/RequireAuth'
+import SectionAuth from './Contexts/SectionAuth'
 
 function Layout() {
   return (
@@ -16,8 +17,10 @@ function Layout() {
         <Container>
           <Navbar.Brand>Travel Plan App</Navbar.Brand>
           <Nav className='me-auto'>
-            <Nav.Link href='/'>Checklist</Nav.Link>
-            <Nav.Link href='/bucketlist'>Bucket list</Nav.Link>
+            <SectionAuth>
+              <Nav.Link href='/'>Checklist</Nav.Link>
+              <Nav.Link href='/bucketlist'>Bucket list</Nav.Link>
+            </SectionAuth>
           </Nav>
         </Container>
       </Navbar>
