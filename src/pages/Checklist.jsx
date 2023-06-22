@@ -1,18 +1,6 @@
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { checklist } from "../checklist";
-
-function ChecklistData({ checklist }) {
-    return checklist.checklist.map((list, index) => {
-        return (
-            <tr key={index}>
-                <td className="text-center">{index+1}</td>
-                <td>{list.item}</td>
-                <td className="text-center"><Form.Check type="checkbox" /></td>
-                <td className="text-center"><Form.Check type="checkbox" /></td>
-            </tr>
-        )
-    })
-}
+import ShowChecklist from "../components/ShowChecklist";
 
 export default function Checklist() {
   return (
@@ -28,7 +16,7 @@ export default function Checklist() {
                 </tr>
             </thead>
             <tbody className="text-start">
-                <ChecklistData checklist={checklist} />
+                <ShowChecklist checklist={checklist} />
             </tbody>
         </table>
     <Button className="position-absolute sticky-bottom end-0 m-5 px-4 py-2"><i className="bi bi-pencil-square me-2" />Edit</Button>
