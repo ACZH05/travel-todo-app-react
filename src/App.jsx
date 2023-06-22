@@ -5,6 +5,9 @@ import { Container, Nav, Navbar } from 'react-bootstrap'
 import Checklist from './pages/Checklist'
 import Bucketlist from './pages/Bucketlist'
 import ErrorPage from './pages/ErrorPage'
+import useLocalStorage from 'use-local-storage'
+import { AuthContext } from './Contexts/AuthContext'
+import RequireAuth from './components/RequireAuth'
 
 function Layout() {
   return (
@@ -24,17 +27,20 @@ function Layout() {
 }
 
 export default function App() {
+  const [token, setToken] = useLocalStorage("token", null)
   return (
+    <AuthContext.Provider value={{ token, setToken }}>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Layout />}>
-            <Route index element={<Checklist />} />
-            <Route path='bucketlist' element={<Bucketlist />} />
+            <Route index element={<RequireAuth><Checklist /></RequireAuth>} />
+            <Route path='bucketlist' element={<RequireAuth><Bucketlist /></RequireAuth>} />
             <Route path='login' element={<Login />} />
             <Route path='register' element={<Register />} />
             <Route path='*' element={<ErrorPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
+    </AuthContext.Provider>
   )
 }
