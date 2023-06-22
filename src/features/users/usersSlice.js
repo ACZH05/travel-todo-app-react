@@ -16,14 +16,9 @@ const userSlice = createSlice({
             }
             state.push(newUser)
         },
-        loginUser: (state, action) => {
-            state.forEach((state) => {
-                return (state.username === action.payload.username && state.password === action.payload.password)
-            })
-        }
     }
 })
 
-export const { registerUsers, loginUser } = userSlice.actions
+export const { registerUsers } = userSlice.actions
 
 export default userSlice.reducer

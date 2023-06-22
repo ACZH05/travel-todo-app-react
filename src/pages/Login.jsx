@@ -1,27 +1,26 @@
 import { useContext, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../features/users/usersSlice";
+// import { loginUser } from "../features/users/usersSlice";
 import { AuthContext } from "../Contexts/AuthContext";
 
 export default function Login() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [isCorrect, setIsCorrect] = useState(false)
+  const users = useSelector((state) => state.posts)
   const setToken = useContext(AuthContext).setToken
   const navigate = useNavigate()
-  const dispatch = useDispatch()
   
   const handleSubmit = (e) => {
     e.preventDefault()
-    setIsCorrect(dispatch(loginUser({username, password})))
-    if (isCorrect) {
-      setToken(username)
-      navigate("/")
-    } else {
-      alert("Invalid username or password")
-    }
+    users.forEach((user) => {
+      if (username === user.username && password === user.password) {
+        setToken(username)
+        navigate("/")
+      }
+    })
   }
   return (
     <Container className="position-absolute top-50 start-50 translate-middle border border-2 p-5 rounded" style={{ width: "30%" }}>
