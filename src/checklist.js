@@ -1,5 +1,6 @@
 export const checklist = {
     username: "Alfred",
+    password: "123456",
     checklist: [
         {
           item: "Passport",
