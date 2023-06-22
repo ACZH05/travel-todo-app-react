@@ -1,26 +1,15 @@
 import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { registerUsers } from "../features/users/usersSlice";
-import { useNavigate } from "react-router-dom";
 
 
 export default function Register() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    dispatch(registerUsers({username, password}))
-    setUsername("")
-    setPassword("")
-    navigate("/login")
-  }
+
   return (
     <Container className="position-absolute top-50 start-50 translate-middle border border-2 p-5 rounded" style={{ width: "30%" }}>
-      <Form onSubmit={handleSubmit}>
+      <Form>
         <h1 className="mb-3">Register</h1>
         <Form.Group className="mb-4">
           <Form.Label>Username</Form.Label>

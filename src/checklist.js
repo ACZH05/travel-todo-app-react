@@ -1,4 +1,4 @@
-export const checklist = {
+export let checklist = {
     username: "Alfred",
     password: "123456",
     checklist: [
