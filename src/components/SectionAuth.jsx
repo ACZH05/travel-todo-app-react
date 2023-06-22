@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { AuthContext } from "./AuthContext"
+import { AuthContext } from "../Contexts/AuthContext"
 
 function SectionAuth({ children }) {
   const token = useContext(AuthContext).token

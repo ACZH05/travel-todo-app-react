@@ -8,7 +8,7 @@ import ErrorPage from './pages/ErrorPage'
 import useLocalStorage from 'use-local-storage'
 import { AuthContext } from './Contexts/AuthContext'
 import RequireAuth from './components/RequireAuth'
-import SectionAuth from './Contexts/SectionAuth'
+import SectionAuth from './components/SectionAuth'
 
 function Layout() {
   return (
