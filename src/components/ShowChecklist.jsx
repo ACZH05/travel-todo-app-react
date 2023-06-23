@@ -10,16 +10,21 @@ function ShowChecklist({handleHomeCheck, handleHotelCheck, isDelete}) {
     const filterUsers = users.filter((user) => user.username === token)[0]
 
     const handleDelete = (e) => {
-        const updateUsers = [...users]
+        const updateUsers = [...users];
 
-        const filterUser = updateUsers.filter((user) => user.username === token)[0]
+        const filterUser = updateUsers.find((user) => user.username === token);
+        
         if (filterUser) {
-            const filterItem = filterUser.checklist.filter((item) => item.item !== e.target.value)
-            if (filterItem) {
-                filterUser.checklist = filterItem
-            }
+          const filterItem = filterUser.checklist.filter((item) => item.item !== e.target.value);
+        
+          if (filterItem) {
+            filterUser.checklist = filterItem;
+          }
         }
-        setUsers(updateUsers)
+        
+        const updatedUsers = [...updateUsers]; // Create a copy of the updated users array
+        setUsers(updatedUsers); // Update the state with the new array
+        
     }
     
     return filterUsers.checklist.map((list, index) => {
