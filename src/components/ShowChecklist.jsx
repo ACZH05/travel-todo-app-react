@@ -10,12 +10,15 @@ function ShowChecklist({handleHomeCheck, handleHotelCheck, isDelete}) {
     const filterUsers = users.filter((user) => user.username === token)[0]
 
     const handleDelete = (e) => {
+        const value = e.target.value
         const updateUsers = [...users];
 
         const filterUser = updateUsers.find((user) => user.username === token);
         
         if (filterUser) {
-          const filterItem = filterUser.checklist.filter((item) => item.item !== e.target.value);
+            const userChecklist = filterUser.checklist
+          const filterItem = userChecklist.filter((item) => item.item != value);
+          console.log(filterItem)
         
           if (filterItem) {
             filterUser.checklist = filterItem;

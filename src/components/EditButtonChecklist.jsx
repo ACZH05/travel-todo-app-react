@@ -22,6 +22,7 @@ export default function EditButtonChecklist({ isDelete, setIsDelete }) {
           filterUser.checklist.push(newItem)
         }
         setUsers(updatedUsers)
+        setAddList("")
     }
 
     if (!isDelete) {
